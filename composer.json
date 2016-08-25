@@ -1,0 +1,21 @@
+{
+    "name": "tmukherjee13/yii2-file-storage",
+    "description": "File system Abstraction Layer for Yii2",
+    "type": "yii2-extension",
+    "keywords": ["yii2","file","storage","abstraction",""],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Tarun M",
+            "email": "tmukherjee13@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "tmukherjee13\\filestorage\\": ""
+        }
+    }
+}

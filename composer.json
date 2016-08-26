@@ -1,5 +1,5 @@
 {
-    "name": "tmukherjee13/yii2-file-storage",
+    "name": "tmukherjee13/yii2-storage",
     "description": "File system Abstraction Layer for Yii2",
     "type": "yii2-extension",
     "keywords": ["yii2", "file", "storage", "abstraction"],

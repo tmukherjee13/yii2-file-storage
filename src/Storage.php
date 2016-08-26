@@ -26,7 +26,7 @@ abstract class Storage extends Component implements StorageInterface
     /**
      * @var string file system path, which is basic for all buckets.
      */
-    private $_basePath = '';
+    private $path = '';
     /**
      * @var string web URL, which is basic for all buckets.
      */

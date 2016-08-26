@@ -1,21 +1,16 @@
 <?php
 
-namespace tmukherjee\storage;
+namespace tmukherjee13\storage;
 
+use Gaufrette\Filesystem;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
-use yii\caching\Cache;
 use yii\log\Logger;
 
-abstract class Storage extends Component implements StorageInterface
+abstract class Storage extends Component
 {
 
-    public $config;
-    public $cache;
-    public $cacheKey      = 'filestorage';
-    public $cacheDuration = 3600;
-    public $replica;
     protected $filesystem;
 
     /**
@@ -26,7 +21,8 @@ abstract class Storage extends Component implements StorageInterface
     /**
      * @var string file system path, which is basic for all buckets.
      */
-    private $path = '';
+    public $path   = null;
+    public $create = true;
     /**
      * @var string web URL, which is basic for all buckets.
      */
@@ -49,31 +45,16 @@ abstract class Storage extends Component implements StorageInterface
 
     public function init()
     {
+        if ($this->path === null) {
+            throw new InvalidConfigException('The "path" property must be set.');
+        }
+        $this->path = Yii::getAlias($this->path);
+
+        $this->create = Yii::getAlias($this->create);
+
         $adapter = $this->prepareAdapter();
 
-        if ($this->cache !== null) {
-            /* @var Cache $cache */
-            $cache = Yii::$app->get($this->cache);
-
-            if (!$cache instanceof Cache) {
-                throw new InvalidConfigException('The "cache" property must be an instance of \yii\caching\Cache subclasses.');
-            }
-
-            $adapter = new CachedAdapter($adapter, new YiiCache($cache, $this->cacheKey, $this->cacheDuration));
-        }
-
-        if ($this->replica !== null) {
-            /* @var Filesystem $filesystem */
-            $filesystem = Yii::$app->get($this->replica);
-
-            if (!$filesystem instanceof Filesystem) {
-                throw new InvalidConfigException('The "replica" property must be an instance of \creocoder\flysystem\Filesystem subclasses.');
-            }
-
-            $adapter = new ReplicateAdapter($adapter, $filesystem->getAdapter());
-        }
-
-        $this->filesystem = new NativeFilesystem($adapter, $this->config);
+        $this->filesystem = new Filesystem($adapter);
     }
 
     /**

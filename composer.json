@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "tmukherjee13\\filestorage\\": "src"
+            "tmukherjee13\\storage\\": "src"
         }
     }
 }

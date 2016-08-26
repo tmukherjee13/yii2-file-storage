@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist tmukherjee13/yii2-file-storage "*"
+php composer.phar require --prefer-dist tmukherjee13/yii2-storage "*"
 ```
 
 or add
 
 ```
-"tmukherjee13/yii2-file-storage": "*"
+"tmukherjee13/yii2-storage": "*"
 ```
 
 to the require section of your `composer.json` file.

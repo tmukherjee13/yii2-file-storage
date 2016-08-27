@@ -5,6 +5,7 @@ use Aws\S3\S3Client;
 use Gaufrette\Adapter\AwsS3 as AwsS3Adapter;
 use Gaufrette\Adapter\Local as LocalAdapter;
 use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  *

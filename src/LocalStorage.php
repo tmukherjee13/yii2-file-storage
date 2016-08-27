@@ -2,6 +2,7 @@
 namespace tmukherjee13\storage;
 
 use Gaufrette\Adapter\Local as LocalAdapter;
+use yii\base\InvalidConfigException;
 
 /**
  *
@@ -30,7 +31,7 @@ class LocalStorage extends Storage
         $this->path = Yii::getAlias($this->path);
 
         $this->create = Yii::getAlias($this->create);
-        
+
         parent::init();
     }
     /**

@@ -10,7 +10,8 @@
     }],
     "require": {
         "yiisoft/yii2": "*",
-        "knplabs/gaufrette": "*"
+        "knplabs/gaufrette": "*",
+        "aws/aws-sdk-php": "^3.19"
     },
     "autoload": {
         "psr-4": {

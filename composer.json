@@ -17,5 +17,8 @@
         "psr-4": {
             "tmukherjee13\\storage\\": "src"
         }
+    },
+    "extra": {
+        "bootstrap": "tmukherjee13\\storage\\StorageBootstrap"
     }
 }

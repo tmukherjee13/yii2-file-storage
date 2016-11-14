@@ -34,9 +34,7 @@ abstract class Storage extends Component
 
     public function init()
     {
-
         $adapter = $this->prepareAdapter();
-
         $this->filesystem = new Filesystem($adapter);
     }
 

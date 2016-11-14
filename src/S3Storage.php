@@ -46,6 +46,7 @@ class S3Storage extends Storage
 
         parent::init();
     }
+    
     /**
      * @return LocalAdapter
      */
@@ -54,10 +55,12 @@ class S3Storage extends Storage
 
         $s3client = S3Client::factory(array(
             // 'profile' => 'default',
-            'key'     => $this->key,
-            'secret'  => $this->secret,
-            'version' => $this->version,
-            'region'  => $this->region,
+            'version'     => $this->version,
+            'region'      => $this->region,
+            'credentials' => [
+                'key'    => $this->key,
+                'secret' => $this->secret,
+            ],
         ));
         return new AwsS3Adapter($s3client, $this->bucket);
     }

@@ -16,7 +16,6 @@ class StorageBootstrap implements BootstrapInterface
     public function bootstrap($app)
     {
 
-        die(__FILE__);
         self::getStorage($app);
     }
     /**
@@ -27,31 +26,21 @@ class StorageBootstrap implements BootstrapInterface
      */
     public static function getStorage($app)
     {
-        // if (self::$_storage) {
-        //     return self::$_storage;
-        // }
+        if (self::$_storage) {
+            return self::$_storage;
+        }
 
-        // foreach ($app->components as $name => $config) {
-        //     $class = is_string($config) ? $config : @$config['class'];
-        //     if($class == str_replace('Bootstrap', 'Manager', get_called_class())){
-        //         return self::$_eventHandler = $app->$name;
-        //     }
-        // }
+        foreach ($app->components as $name => $config) {
+            $class = is_string($config) ? $config : @$config['class'];
+            if($class == str_replace('Bootstrap', 'Manager', get_called_class())){
+                return self::$_storage = $app->$name;
+            }
+        }
 
         $eventFile = \Yii::getAlias('@app/config/_storage.php');
 
-        die($eventFile);
+        \Yii::configure(\Yii::$app, require(\Yii::getAlias('@app/config/_storage.php')));
 
-        \Yii::configure($this, require(\Yii::getAlias('@app/config/_storage.php')));
-
-        // $app->setComponents([
-        //     'storage' => [
-        //         'class'  => 'tmukherjee13\storage\EventHandler',
-        //         'events' => file_exists($eventFile) && is_file($eventFile)
-        //             ? include $eventFile 
-        //             : []
-        //     ],
-        // ]);
-        return self::$_storage = $app->_storage;
+        return self::$_storage = $app->storage;
     }
 }

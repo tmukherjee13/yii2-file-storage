@@ -3,6 +3,7 @@ namespace tmukherjee13\storage;
 
 use Gaufrette\Adapter\Local as LocalAdapter;
 use yii\base\InvalidConfigException;
+use Yii;
 
 /**
  *

@@ -1,8 +1,9 @@
 <?php
 namespace tmukherjee13\storage;
 
-use yii\base\BootstrapInterface;
 use yii\base\Application;
+use yii\base\BootstrapInterface;
+use yii\helpers\FileHelper;
 
 class StorageBootstrap implements BootstrapInterface
 {
@@ -32,14 +33,18 @@ class StorageBootstrap implements BootstrapInterface
 
         foreach ($app->components as $name => $config) {
             $class = is_string($config) ? $config : @$config['class'];
-            if($class == str_replace('Bootstrap', 'Manager', get_called_class())){
+            if ($class == str_replace('Bootstrap', 'Manager', get_called_class())) {
                 return self::$_storage = $app->$name;
             }
         }
 
-        $eventFile = \Yii::getAlias('@app/config/_storage.php');
+        $configFilename = \Yii::getAlias('@app/config/_storage.php');
+        if (!file_exists($configFilename)) {
+            FileHelper::copyDirectory(\Yii::getAlias('@vendor/tmukherjee13/yii2-storage/src/config'), \Yii::getAlias('@app/config/'), []);
+        }
 
-        \Yii::configure(\Yii::$app, require(\Yii::getAlias('@app/config/_storage.php')));
+        $eventFile = \Yii::getAlias('@app/config/_storage.php');
+        \Yii::configure(\Yii::$app, require ($configFilename));
 
         return self::$_storage = $app->storage;
     }
